@@ -13,6 +13,7 @@
 
     <!-- region actions -->
     <string name="action_accept">Aceptar</string>
+    <string name="action_cancel">Cancelar</string>
     <string name="action_next">Siguiente</string>
     <string name="action_register">Registrese</string>
     <!-- endregion actions -->
