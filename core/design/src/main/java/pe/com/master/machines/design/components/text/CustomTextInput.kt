@@ -19,6 +19,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -52,7 +54,12 @@ fun CustomTextInput(
     onClickTextView: () -> Unit = {}
 ) {
     val interactionSource = remember { MutableInteractionSource() }
-
+    val visualTransformation = if (keyboardType == KeyboardType.Password) {
+        PasswordVisualTransformation()
+    } else {
+        VisualTransformation.None
+    }
+    
     Column(modifier = modifier) {
         OutlinedTextField(
             value = value,
@@ -61,11 +68,11 @@ fun CustomTextInput(
                     it.isBlank() -> {
                         it
                     }
-
+                    
                     it.length <= maxCharacter && it.matches(regex) -> {
                         it
                     }
-
+                    
                     else -> {
                         value
                     }
@@ -121,6 +128,7 @@ fun CustomTextInput(
             },
             isError = messageError.isNotBlank(),
             keyboardOptions = KeyboardOptions(keyboardType = keyboardType),
+            visualTransformation = visualTransformation,
             singleLine = maxLines == 1,
             minLines = minLines,
             maxLines = maxLines,
@@ -146,7 +154,7 @@ fun CustomTextInput(
             )
         }
     }
-
+    
     LaunchedEffect(interactionSource) {
         interactionSource.interactions.collect { interaction ->
             if (interaction is PressInteraction.Release) {
@@ -162,6 +170,7 @@ fun PreviewCustomTextInput() {
     CustomTextInput(
         value = "es una prueba",
         hintText = "prueba",
+        keyboardType = KeyboardType.Password,
         leadingIcon = R.drawable.ic_action_email,
         leadingIconColor = MaterialTheme.colorScheme.primary
     )

@@ -9,6 +9,8 @@ import pe.com.master.machines.design.utils.Utils.backEnterTransition
 import pe.com.master.machines.design.utils.Utils.backExitTransition
 import pe.com.master.machines.design.utils.Utils.forwardEnterTransition
 import pe.com.master.machines.design.utils.Utils.forwardExitTransition
+import pe.com.master.machines.home.navigation.HomeRoute
+import pe.com.master.machines.home.screen.HomeScreen
 import pe.com.master.machines.login.navigation.LoginRoute
 import pe.com.master.machines.login.screen.LoginScreen
 import pe.com.master.machines.register.navigation.RegisterRoute
@@ -18,9 +20,9 @@ import pe.com.master.machines.register.screen.RegisterUserScreen
 fun NavigationMainWrapper(
     modifier: Modifier = Modifier
 ) {
-
+    
     val navController = rememberNavController()
-
+    
     NavHost(
         modifier = modifier,
         navController = navController,
@@ -30,30 +32,45 @@ fun NavigationMainWrapper(
         popEnterTransition = { backEnterTransition },
         popExitTransition = { backExitTransition }
     ) {
-
+        
         composable<LoginRoute> {
             LoginScreen(
                 navigateToRegister = {
                     navController.navigate(RegisterRoute)
                 },
-                navigateToHome = {},
-                /*navigateToHome = {
+                navigateToHome = {
                     navController.navigate(HomeRoute) {
-                        popUpTo<SplashRoute> { inclusive = true }
+                        popUpTo<LoginRoute> { inclusive = true }
                         launchSingleTop = true
                     }
-                }*/
+                },
             )
         }
-
+        
         composable<RegisterRoute> {
             RegisterUserScreen(
                 navigateToBack = {
                     navController.navigateUp()
                 },
-                navigateToHome = {},
+                navigateToHome = {
+                    navController.navigate(HomeRoute) {
+                        popUpTo<LoginRoute> { inclusive = true }
+                        launchSingleTop = true
+                    }
+                },
+            )
+        }
+        
+        composable<HomeRoute> {
+            HomeScreen(
+                navigateToLogin = {
+                    navController.navigate(LoginRoute) {
+                        popUpTo<HomeRoute> { inclusive = true }
+                        launchSingleTop = true
+                    }
+                },
             )
         }
     }
-
+    
 }
