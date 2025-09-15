@@ -1,0 +1,19 @@
+<resources>
+
+    <!-- region text -->
+    <string name="text_register">Registrate gratis</string>
+    <!-- endregion text -->
+    <!-- region hint -->
+    <string name="hint_email">Correo electrónico</string>
+    <string name="hint_first_name">Nombre</string>
+    <string name="hint_last_name">Apellido</string>
+    <string name="hint_password">Contraseña</string>
+    <string name="hint_repeat_password">Repetir Contraseña</string>
+    <!-- endregion hint -->
+
+    <!-- region actions -->
+    <string name="action_next">Siguiente</string>
+    <string name="action_register">Registrese</string>
+    <!-- endregion actions -->
+
+</resources>
