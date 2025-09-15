@@ -6,7 +6,7 @@ import javax.inject.Inject
 class LoadTimeFrameUseCase @Inject constructor(
     private var timeFrameDataRepository: TimeFrameDataRepository,
 ) {
-
-    operator fun invoke(startDate: String, endDate: String, currencies: String) =
+    
+    operator fun invoke(startDate: String, endDate: String, currencies: String = "EUR,CLP") =
         timeFrameDataRepository.getLoadTimeFrame(startDate, endDate, currencies)
 }

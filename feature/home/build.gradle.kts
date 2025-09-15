@@ -58,6 +58,8 @@ dependencies {
     kspAndroidTest(libs.hilt.compiler)
     //serialization
     implementation(libs.androidx.serialization.json)
+    //graficos estadisticos
+    implementation(libs.mpandroidchart)
     
     implementation(projects.core.common)
     implementation(projects.core.domain)

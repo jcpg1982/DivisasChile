@@ -1,11 +1,11 @@
 package pe.com.master.machines.model.reponse
 
-import java.math.BigDecimal
+import pe.com.master.machines.model.model.DailyRates
 
 data class ResponseTimeFrame(
     val endDate: String,
     val privacy: String,
-    val quotes: Map<String, Map<String, BigDecimal>>,
+    val quotes: List<DailyRates>,
     val source: String,
     val startDate: String,
     val success: Boolean,
