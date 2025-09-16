@@ -23,10 +23,10 @@ import javax.inject.Inject
 class LoginViewModel @Inject constructor(
     private val loginUseCase: LoginUseCase,
 ) : ViewModel() {
-    
+
     private var _loginUserState = MutableStateFlow<LoginState>(LoginState.First)
     val loginUserState get() = _loginUserState.asStateFlow()
-    
+
     private val _emailUser = MutableStateFlow("")
     val emailUser = _emailUser.asStateFlow()
     private val _passwordUser = MutableStateFlow("")
@@ -35,15 +35,15 @@ class LoginViewModel @Inject constructor(
         email.isNotEmpty() && password.isNotEmpty()
     }.stateIn(viewModelScope, SharingStarted.Eagerly, false)
     val enabledButton = _enabledButton
-    
+
     fun updateEmailUser(email: String) {
         _emailUser.update { email }
     }
-    
+
     fun updatePasswordUser(password: String) {
         _passwordUser.update { password }
     }
-    
+
     fun loginUser() {
         viewModelScope.launch {
             loginUseCase.invoke(emailUser.value, passwordUser.value)
@@ -57,8 +57,11 @@ class LoginViewModel @Inject constructor(
                 .collect { res ->
                     when (res) {
                         is Resource.Error -> _loginUserState.update { LoginState.Error(res.messageError) }
-                        
-                        is Resource.Success -> _loginUserState.update { LoginState.Success }
+
+                        is Resource.Success -> {
+                            if (res.data == null) _loginUserState.update { LoginState.Error("Usuario no encontrado") }
+                            else _loginUserState.update { LoginState.Success }
+                        }
                     }
                 }
         }

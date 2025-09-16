@@ -44,10 +44,11 @@ fun HomeScreen(
     
     var openCalendar by remember { mutableStateOf(false) }
     var messageError by remember { mutableStateOf("") }
-    
+    var messageExitApp by remember { mutableStateOf("") }
+
     val menuOptions = listOf(
         "Calendario" to { openCalendar = !openCalendar },
-        "Cerrar sesion" to { messageError = "Desea salir de la aplicacion?" },
+        "Cerrar sesion" to { messageExitApp = "Desea salir de la aplicacion?" },
     )
     
     Scaffold(
@@ -138,15 +139,15 @@ fun HomeScreen(
         }
     }
     
-    if (messageError.isNotEmpty()) {
+    if (messageExitApp.isNotEmpty()) {
         TwoAlertDialog(
             title = "Salir de la aplicacion",
-            message = messageError,
+            message = messageExitApp,
             onAccept = {
-                messageError = ""
+                messageExitApp = ""
                 navigateToLogin()
             },
-            onDismiss = { messageError = "" }
+            onDismiss = { messageExitApp = "" }
         )
     }
     

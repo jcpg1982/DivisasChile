@@ -34,7 +34,7 @@ class HomeViewModel @Inject constructor(
         val calendar = DateUtils.getCurrentCalendar
         dateInitEnd = DateUtils.getCurrentTime.time.calendarLongToString(DateUtils.YYYY_MM_DD)
         
-        calendar.add(Calendar.DAY_OF_MONTH, -1)
+        calendar.add(Calendar.DAY_OF_MONTH, -15)
         dateInitStart = calendar.time.time.calendarLongToString(DateUtils.YYYY_MM_DD)
         
         if (!dateInitStart.isNullOrBlank() && !dateInitEnd.isNullOrBlank()) {

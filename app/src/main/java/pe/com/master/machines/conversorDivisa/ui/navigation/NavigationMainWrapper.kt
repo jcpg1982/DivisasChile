@@ -26,7 +26,7 @@ fun NavigationMainWrapper(
     NavHost(
         modifier = modifier,
         navController = navController,
-        startDestination = HomeRoute,//LoginRoute,
+        startDestination = LoginRoute,
         enterTransition = { forwardEnterTransition },
         exitTransition = { forwardExitTransition },
         popEnterTransition = { backEnterTransition },
